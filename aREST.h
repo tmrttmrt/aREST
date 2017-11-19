@@ -1468,7 +1468,7 @@ void variable(char * variable_name, int *variable){
 
 // Float variables (Mega & ESP only, or without CC3000)
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(ESP8266) || defined(CORE_WILDFIRE) || !defined(ADAFRUIT_CC3000_H) || defined(ESP32)
-void variable(char * variable_name, float *variable){
+void variable(char * variable_name, double *variable){
 
   float_variables[float_variables_index] = variable;
   float_variables_names[float_variables_index] = variable_name;
@@ -1684,6 +1684,17 @@ void addToBuffer(float toAdd){
 }
 #endif
 
+// Add to output buffer (Mega & ESP only)
+#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(ESP8266) || defined(CORE_WILDFIRE) || !defined(ADAFRUIT_CC3000_H)
+void addToBuffer(double toAdd){
+
+  char number[10];
+  dtostrf((float)toAdd, 5, 2, number);
+
+  addToBuffer(number);
+}
+#endif
+
 // Add to output buffer
 void addToBuffer(const __FlashStringHelper *toAdd){
 
@@ -1873,6 +1884,7 @@ private:
   uint16_t value;
   boolean pin_selected;
 
+  
   char* remote_server;
   int port;
 
@@ -1917,7 +1929,7 @@ private:
   // Float variables arrays (Mega & ESP8266 only)
   #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(ESP8266) || defined(CORE_WILDFIRE) || !defined(ADAFRUIT_CC3000_H) || defined(ESP32)
   uint8_t float_variables_index;
-  float * float_variables[NUMBER_VARIABLES];
+  double * float_variables[NUMBER_VARIABLES];
   char * float_variables_names[NUMBER_VARIABLES];
   #endif
 
