@@ -77,7 +77,7 @@
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(CORE_WILDFIRE) || defined(ESP8266) || defined(ESP32)
 #define NUMBER_ANALOG_PINS 16
 #define NUMBER_DIGITAL_PINS 54
-#define OUTPUT_BUFFER_SIZE 3000
+#define OUTPUT_BUFFER_SIZE 10000
 #elif defined(__AVR_ATmega328P__) && !defined(ADAFRUIT_CC3000_H)
 #define NUMBER_ANALOG_PINS 6
 #define NUMBER_DIGITAL_PINS 14
